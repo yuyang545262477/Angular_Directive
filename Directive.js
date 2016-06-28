@@ -14,14 +14,17 @@
     
     function unorderedList() {
         return function (scope, element, attrs) {
+            //get scope data
             var data = scope[attrs["unorderedList"]];
+            //get attrs..
+            var _attrs = attrs["listProperty"];
             if (angular.isArray(data)) {
                 // create a ul
                 var ul = angular.element('<ul>');
                 element.append(ul);
                 for (var i = 0; i < data.length; i++) {
                     var li = angular.element('<li>');
-                    li.text(data[i].name);
+                    li.text(data[i][_attrs]);
                     ul.append(li);
                 }
             }
