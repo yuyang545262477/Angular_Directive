@@ -10,6 +10,13 @@
             {name: "Apples", category: "Fruit", price: 1.20, expiry: 10},
             {name: "Bananas", category: "Fruit", price: 2.42, expiry: 7},
             {name: "Pears", category: "Fruit", price: 2.02, expiry: 6}];
+        
+        $scope.incrementPrices = function () {
+            for (var i = 0; i < $scope.products.length; i++) {
+                var obj = $scope.products[i];
+                obj.price++;
+            }
+        }
     }
     
     function unorderedList() {
@@ -23,10 +30,19 @@
                 var ul = angular.element('<ul>');
                 element.append(ul);
                 for (var i = 0; i < data.length; i++) {
-                    var li = angular.element('<li>');
-                    // li.text(data[i][propertyExpression]);
-                    li.text(scope.$eval(propertyExpression, data[i]));
-                    ul.append(li);
+                    (function () {
+                        
+                        var _li = angular.element('<li>');
+                        var index = i;
+                        
+                        var watchFn = function (watchScope) {
+                            return watchScope.$eval(propertyExpression, data[index]);
+                        };
+                        scope.$watch(watchFn, function (newValue) {
+                            _li.text(newValue);
+                        });
+                        ul.append(_li);
+                    })();
                 }
             }
         }
