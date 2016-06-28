@@ -1,0 +1,21 @@
+{
+  "name": "Angular_Directive",
+  "homepage": "https://github.com/yuyang545262477/Angular_Directive",
+  "authors": [
+    "David_Yu <yuyang545262477@gmail.com>"
+  ],
+  "description": "",
+  "main": "index.html",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.6",
+    "angular": "^1.5.7"
+  }
+}
