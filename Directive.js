@@ -17,14 +17,15 @@
             //get scope data
             var data = scope[attrs["unorderedList"]];
             //get attrs..
-            var _attrs = attrs["listProperty"];
+            var propertyExpression = attrs["listProperty"];
             if (angular.isArray(data)) {
                 // create a ul
                 var ul = angular.element('<ul>');
                 element.append(ul);
                 for (var i = 0; i < data.length; i++) {
                     var li = angular.element('<li>');
-                    li.text(data[i][_attrs]);
+                    // li.text(data[i][propertyExpression]);
+                    li.text(scope.$eval(propertyExpression, data[i]));
                     ul.append(li);
                 }
             }
