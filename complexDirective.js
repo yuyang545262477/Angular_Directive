@@ -27,6 +27,5 @@
             template: "<ul><li ng-repeat='item in data'>{{ item.price|currency }} </li></ul>",
             restrict: "A"
         }
-        
     }
 })();
