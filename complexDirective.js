@@ -20,31 +20,35 @@
     }
     
     function unorderedList() {
-        return function (scope, element, attrs) {
-            //get scope data
-            var data = scope[attrs["unorderedList"]];
-            //get attrs..
-            var propertyExpression = attrs["listProperty"];
-            if (angular.isArray(data)) {
-                // create a ul
-                var ul = angular.element('<ul>');
-                element.append(ul);
-                for (var i = 0; i < data.length; i++) {
-                    (function () {
-                        
-                        var _li = angular.element('<li>');
-                        var index = i;
-                        
-                        var watchFn = function (watchScope) {
-                            return watchScope.$eval(propertyExpression, data[index]);
-                        };
-                        scope.$watch(watchFn, function (newValue) {
-                            _li.text(newValue);
-                        });
-                        ul.append(_li);
-                    })();
+        return {
+            link: function (scope, element, attrs) {
+                
+                //get scope data
+                var data = scope[attrs["unorderedList"] || attrs["listSource"]];
+                //get attrs..
+                var propertyExpression = attrs["listProperty"] || "price | currency";
+                if (angular.isArray(data)) {
+                    // create a ul
+                    var ul = angular.element('<ul>');
+                    element.append(ul);
+                    for (var i = 0; i < data.length; i++) {
+                        (function () {
+                            
+                            var _li = angular.element('<li>');
+                            var index = i;
+                            
+                            var watchFn = function (watchScope) {
+                                return watchScope.$eval(propertyExpression, data[index]);
+                            };
+                            scope.$watch(watchFn, function (newValue) {
+                                _li.text(newValue);
+                            });
+                            ul.append(_li);
+                        })();
+                    }
                 }
-            }
+            },
+            restrict: "EACM"
         }
         
     }
