@@ -15,18 +15,19 @@
     <div class="panel-body">
         <!---->
         <!--if restrict only has A-->
-        <!--<ul unordered-list="products" list-property="price|currency"></ul>-->
+        <div unordered-list="products">
+            this will be remove
+        </div>
 
         <!---->
         <!--if restrict only has E-->
         <!--<unordered-list list-source="products" list-property="price|currency"></unordered-list>-->
         <!---->
         <!--if restrict only has C-->
-        <div class="unordered-list:products" list-property="price|currency"></div>
+        <!--<div class="unordered-list:products" list-property="price|currency"></div>-->
     </div>
 </div>
 
-<button ng-click="incrementPrices()">ADD Price</button>
 
 <script src="bower_components/angular/angular.min.js"></script>
 <script src="complexDirective.js"></script>

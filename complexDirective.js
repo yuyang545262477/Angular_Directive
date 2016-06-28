@@ -11,44 +11,21 @@
             {name: "Bananas", category: "Fruit", price: 2.42, expiry: 7},
             {name: "Pears", category: "Fruit", price: 2.02, expiry: 6}];
         
-        $scope.incrementPrices = function () {
-            for (var i = 0; i < $scope.products.length; i++) {
-                var obj = $scope.products[i];
-                obj.price++;
-            }
-        }
+        // $scope.incrementPrices = function () {
+        //     for (var i = 0; i < $scope.products.length; i++) {
+        //         var obj = $scope.products[i];
+        //         obj.price++;
+        //     }
+        // }
     }
     
     function unorderedList() {
         return {
             link: function (scope, element, attrs) {
-                
-                //get scope data
-                var data = scope[attrs["unorderedList"] || attrs["listSource"]];
-                //get attrs..
-                var propertyExpression = attrs["listProperty"] || "price | currency";
-                if (angular.isArray(data)) {
-                    // create a ul
-                    var ul = angular.element('<ul>');
-                    element.append(ul);
-                    for (var i = 0; i < data.length; i++) {
-                        (function () {
-                            
-                            var _li = angular.element('<li>');
-                            var index = i;
-                            
-                            var watchFn = function (watchScope) {
-                                return watchScope.$eval(propertyExpression, data[index]);
-                            };
-                            scope.$watch(watchFn, function (newValue) {
-                                _li.text(newValue);
-                            });
-                            ul.append(_li);
-                        })();
-                    }
-                }
+                scope.data = scope[attrs["unorderedList"]];
             },
-            restrict: "EACM"
+            template: "<ul><li ng-repeat='item in data'>{{ item.price|currency }} </li></ul>",
+            restrict: "A"
         }
         
     }
