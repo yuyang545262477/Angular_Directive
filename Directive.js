@@ -16,11 +16,14 @@
         return function (scope, element, attrs) {
             var data = scope[attrs["unorderedList"]];
             if (angular.isArray(data)) {
+                // create a ul
+                var ul = angular.element('<ul>');
+                element.append(ul);
                 for (var i = 0; i < data.length; i++) {
-                    console.log(data[i].name);
+                    var li = angular.element('<li>');
+                    li.text(data[i].name);
+                    ul.append(li);
                 }
-            } else {
-                console.log("not a array");
             }
         }
         
